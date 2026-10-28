@@ -1,0 +1,6 @@
+{
+  "name": "CredencialQR",
+  "description": "Credencial virtual ligera y 100% offline para generar y portar tu código QR de identificación personal de forma local y segura.",
+  "requestFramePermissions": ["CAMERA"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

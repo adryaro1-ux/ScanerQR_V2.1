@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>CredencialQR — Tarjeta de Identificación Digital Offline</title>
+    <meta
+      name="description"
+      content="Credencial virtual ligera y 100% offline para generar y portar tu código QR de identificación personal de forma local y segura."
+    />
+    <meta property="og:title" content="CredencialQR — Tarjeta de Identificación Digital Offline" />
+    <meta
+      property="og:description"
+      content="Credencial virtual ligera y 100% offline para generar y portar tu código QR de identificación personal de forma local y segura."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Configuración PWA e instalación en pantalla de inicio -->
+    <meta name="theme-color" content="#0F172A" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CredencialQR" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+    <!-- Regla de Cero Permisos no esenciales (micrófono y geolocalización bloqueados) -->
+    <meta
+      http-equiv="Permissions-Policy"
+      content="microphone=(), geolocation=(), accelerometer=(), gyroscope=()"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-700 selection:text-white">
+    <div id="root"></div>
+
+    <!-- Registro automático del Service Worker para funcionamiento 100% offline -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(function (registration) {
+              console.log('CredencialQR Service Worker registrado:', registration.scope);
+            })
+            .catch(function (error) {
+              console.warn('Error al registrar Service Worker:', error);
+            });
+        });
+      }
+    </script>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
